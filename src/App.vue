@@ -1,11 +1,17 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <HelloWorld msg="Welcome to Your Vue.js App" />
   </div>
 </template>
 
 <script>
+// Import bootstrap library
+import 'bootstrap/dist/css/bootstrap.css'
+
+// Import axios
+import axios from 'axios';
+
 import HelloWorld from './components/HelloWorld.vue'
 
 export default {
