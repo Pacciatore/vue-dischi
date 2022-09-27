@@ -13,7 +13,7 @@
 
         <SelectFilterComponent :filter="searchGenre" @search="doSearch" class="col-4" />
 
-        <SelectFilterComponent :filter="searchGenre" @search="doSearch" class="col-4" />
+        <SelectFilterComponent :filter="searchAuthor" @search="doSearch" class="col-4" />
 
       </div>
 
@@ -22,23 +22,12 @@
 </template>
 
 <script>
-import SelectFilterComponent from './utils/SelectFilterComponent.vue';
+import SelectFilterComponent from '@/components/utils/SelectFilterComponent.vue';
 export default {
   name: "HeaderComponent",
-  data() {
-    return {
-      searchGenre: {
-        name: 'Genere',
-        elements: ['Pop', 'Rock', 'Metal', 'Jazz']
-      },
-      searchAuthor: {
-        name: 'Autore',
-        elements: []
-      }
-    };
-  },
   props: {
-    genres: Array
+    searchGenre: Object,
+    searchAuthor: Object
   },
   methods: {
     doSearch(filter) {

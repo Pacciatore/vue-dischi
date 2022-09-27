@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="d-flex flex-column">
 
-    <HeaderComponent :disksInfo="disksInfo" @search="filterDisks" />
+    <HeaderComponent :searchGenre="searchGenre" :searchAuthor="searchAuthor" @search="filterDisks" />
     <LoaderComponent v-if="loading" />
     <MainComponent v-else-if="errorMessage.length === 0" :disksInfo="disksToDisplay" class="col flex-grow" />
 
@@ -34,8 +34,15 @@ export default {
     return {
       disksApi: 'https://flynn.boolean.careers/exercises/api/array/music',
       disksInfo: [],
-      disksGenres: [],
-      genreToFilter: '',
+      searchGenre: {
+        name: 'Genere',
+        elements: []
+      },
+      searchAuthor: {
+        name: 'Autore',
+        elements: []
+      },
+      searchFilter: '',
 
       // Working Variables
       loading: true,
@@ -61,12 +68,15 @@ export default {
             this.disksInfo.forEach((disk) => {
               console.log('Disco presente: ' + disk.title);
 
-              if (!this.disksGenres.includes(disk.genre))
-                this.disksGenres.push(disk.genre)
+              if (!this.searchGenre.elements.includes(disk.genre))
+                this.searchGenre.elements.push(disk.genre)
+
+              if (!this.searchAuthor.elements.includes(disk.author))
+                this.searchAuthor.elements.push(disk.author)
 
             })
 
-            console.log('Generi musicali presenti: ' + this.disksGenres)
+            console.log('Generi musicali presenti: ' + this.searchGenre.elements)
           }
         })
         .catch((e) => {
@@ -75,9 +85,9 @@ export default {
           this.errorMessage = e.code;
         })
     },
-    filterDisks(genreToSearch) {
-      this.genreToFilter = genreToSearch
-      console.log('Filtro il genere', genreToSearch)
+    filterDisks(elementToSearch) {
+      this.searchFilter = elementToSearch
+      console.log('Filtro gli elementi: ', elementToSearch)
     }
 
   },
@@ -88,12 +98,14 @@ export default {
       this.disksInfo.forEach((disk) => {
 
         // Mostra tutti i dischi
-        if (this.genreToFilter === '') {
+        if (this.searchFilter === '') {
           array.push(disk)
         }
 
         // Mostra i dischi del genere ricercato
-        if (disk.genre === this.genreToFilter) {
+        if (disk.genre === this.searchFilter) {
+          array.push(disk)
+        } else if (disk.author === this.searchFilter) {
           array.push(disk)
         }
 
