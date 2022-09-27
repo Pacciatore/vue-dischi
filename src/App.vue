@@ -5,7 +5,7 @@
     <LoaderComponent v-if="loading" />
     <MainComponent v-else-if="errorMessage.length === 0" :disksInfo="disksInfo" class="col flex-grow" />
 
-    <div v-else>{{ errorMessage }}</div>
+    <ErrorMessageComponent v-else :errorMessage="errorMessage" />
 
   </div>
 </template>
@@ -20,13 +20,15 @@ import axios from 'axios';
 import HeaderComponent from '@/components/HeaderComponent.vue'
 import MainComponent from '@/components/MainComponent.vue'
 import LoaderComponent from '@/components/utils/LoaderComponent.vue'
+import ErrorMessageComponent from '@/components/utils/ErrorMessageComponent.vue';
 
 export default {
   name: 'App',
   components: {
     HeaderComponent,
     MainComponent,
-    LoaderComponent
+    LoaderComponent,
+    ErrorMessageComponent
   },
   data() {
     return {
