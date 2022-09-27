@@ -2,7 +2,8 @@
   <div id="app" class="d-flex flex-column">
 
     <HeaderComponent />
-    <MainComponent :disksInfo="disksInfo" class="col flex-grow" />
+    <LoaderComponent v-if="loading" />
+    <MainComponent v-else :disksInfo="disksInfo" class="col flex-grow" />
 
   </div>
 </template>
@@ -16,18 +17,21 @@ import axios from 'axios';
 
 import HeaderComponent from '@/components/HeaderComponent.vue'
 import MainComponent from '@/components/MainComponent.vue'
+import LoaderComponent from '@/components/utils/LoaderComponent.vue'
 
 export default {
   name: 'App',
   components: {
     HeaderComponent,
-    MainComponent
+    MainComponent,
+    LoaderComponent
   },
   data() {
     return {
       disksApi: 'https://flynn.boolean.careers/exercises/api/array/music',
       disksInfo: [],
-      disksGenres: []
+      disksGenres: [],
+      loading: true
     }
   },
   created() {
@@ -37,20 +41,25 @@ export default {
 
     getDisksInfo() {
       axios.get(this.disksApi)
-        .then((response) => {
-          console.log(response.data)
-          this.disksInfo = response.data.response;
+        .then(({ status, data }) => {
+          this.loading = false;
+          console.log(data)
 
-          // Memorizzo i generi musicali in un array
-          this.disksInfo.forEach((disk) => {
-            console.log('Disco presente: ' + disk.title);
+          if (status === 200) {
 
-            if (!this.disksGenres.includes(disk.genre))
-              this.disksGenres.push(disk.genre)
-          })
+            this.disksInfo = data.response;
 
-          console.log('Generi musicali presenti: ' + this.disksGenres)
+            // Memorizzo i generi musicali in un array
+            this.disksInfo.forEach((disk) => {
+              console.log('Disco presente: ' + disk.title);
 
+              if (!this.disksGenres.includes(disk.genre))
+                this.disksGenres.push(disk.genre)
+
+            })
+
+            console.log('Generi musicali presenti: ' + this.disksGenres)
+          }
         })
     }
 
