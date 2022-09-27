@@ -1,9 +1,9 @@
 <template>
   <div id="app" class="d-flex flex-column">
 
-    <HeaderComponent :genres="disksGenres" />
+    <HeaderComponent :genres="disksGenres" @search="filterDisks" />
     <LoaderComponent v-if="loading" />
-    <MainComponent v-else-if="errorMessage.length === 0" :disksInfo="disksInfo" class="col flex-grow" />
+    <MainComponent v-else-if="errorMessage.length === 0" :disksInfo="disksToDisplay" class="col flex-grow" />
 
     <ErrorMessageComponent v-else :errorMessage="errorMessage" />
 
@@ -35,6 +35,9 @@ export default {
       disksApi: 'https://flynn.boolean.careers/exercises/api/array/music',
       disksInfo: [],
       disksGenres: [],
+      genreToFilter: '',
+
+      // Working Variables
       loading: true,
       errorMessage: ''
     }
@@ -71,9 +74,35 @@ export default {
           this.loading = false;
           this.errorMessage = e.code;
         })
+    },
+    filterDisks(genreToSearch) {
+      this.genreToFilter = genreToSearch
+      console.log('Filtro il genere', genreToSearch)
     }
 
+  },
+  computed: {
+    disksToDisplay() {
+      const array = [];
+
+      this.disksInfo.forEach((disk) => {
+
+        // Mostra tutti i dischi
+        if (this.genreToFilter === '') {
+          array.push(disk)
+        }
+
+        // Mostra i dischi del genere ricercato
+        if (disk.genre === this.genreToFilter) {
+          array.push(disk)
+        }
+
+      })
+
+      return array
+    }
   }
+
 }
 </script>
 

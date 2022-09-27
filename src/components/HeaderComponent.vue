@@ -10,7 +10,12 @@
 
       <!-- Genre selection research -->
       <div class="col-3 d-flex align-items-center">
-        <select name="genreSelection" id="genreSelection" class="col-4 rounded p-1">
+
+        <label for="genreSelection" class="pe-2 text-white">Genere:</label>
+
+        <select name="genreSelection" id="genreSelection" class="col-4 rounded px-1 py-2" @change.prevent="doSearch">
+
+          <option selected value="">Tutti i generi</option>
 
           <option v-for="genre in genres" :key="genre" :value="genre">
             {{ genre }}
@@ -26,8 +31,18 @@
 <script>
 export default {
   name: 'HeaderComponent',
+  data() {
+    return {
+      searchGenre: ''
+    }
+  },
   props: {
     genres: Array
+  },
+  methods: {
+    doSearch(event) {
+      this.$emit('search', event.target.value);
+    }
   }
 }
 </script>
