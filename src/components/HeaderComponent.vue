@@ -60,12 +60,13 @@ header {
 
   // Select genre element
   #genreSelection {
-    background-color: $tr-spotify-main;
+    background-color: $tr-spotify-header;
     color: white;
     border-color: $tr-spotify-green;
 
     &:focus-visible {
       outline: none;
+      background-color: $tr-spotify-main;
     }
 
   }
