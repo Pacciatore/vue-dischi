@@ -25,11 +25,12 @@ export default {
   },
   data() {
     return {
+      disksApi: 'https://flynn.boolean.careers/exercises/api/array/music',
       diskInfo: []
     }
   },
   mounted() {
-    axios.get('https://flynn.boolean.careers/exercises/api/array/music')
+    axios.get(this.disksApi)
       .then((response) => {
         console.log(response.data)
         this.diskInfo = response.data.response;
