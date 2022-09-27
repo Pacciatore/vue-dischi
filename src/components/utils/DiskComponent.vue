@@ -32,6 +32,11 @@ export default {
 div.d-flex {
     background-color: $tr-spotify-header;
 
+    .img-container {
+        min-height: 183px;
+        color: white;
+    }
+
     .disk-author {
         color: #808080;
     }
