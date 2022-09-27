@@ -14,7 +14,6 @@ export default {
 @import '@/assets/style/variables.scss';
 
 main {
-    height: 90vh;
     background-color: $tr-spotify-main;
 }
 </style>

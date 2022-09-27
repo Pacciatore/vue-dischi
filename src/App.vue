@@ -1,8 +1,8 @@
 <template>
-  <div id="app">
+  <div id="app" class="d-flex flex-column">
 
     <HeaderComponent />
-    <MainComponent />
+    <MainComponent class="col flex-grow" />
 
   </div>
 </template>
@@ -37,5 +37,7 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  height: 100vh;
 }
 </style>

@@ -14,7 +14,7 @@ export default {
 @import '@/assets/style/variables.scss';
 
 header {
-  height: 10vh;
   background-color: $tr-spotify-header;
+
 }
 </style>
