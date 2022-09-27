@@ -1,16 +1,19 @@
 <template>
-    <div class="text-center col-3 d-flex flex-column">
+    <div class="text-center col-2 p-3 d-flex flex-column justify-content-start">
+
         <div class="img-container">
-            <img :src="info.poster" :alt="info.title">
+            <img class="img-fluid" :src="info.poster" :alt="info.title">
         </div>
 
-        <h2> {{ info.title }}</h2>
-        <p>
+        <h4 class="text-white fw-bold text-uppercase py-3"> {{ info.title }}</h4>
+        <div class="disk-author">
             {{ info.author }}
-        </p>
-        <p>
-            {{ info.year }}
-        </p>
+            <p>
+                {{ info.year }}
+            </p>
+
+        </div>
+
     </div>
 </template>
 
@@ -24,5 +27,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/style/variables.scss';
 
+div.d-flex {
+    background-color: $tr-spotify-header;
+
+    .disk-author {
+        color: #808080;
+    }
+
+}
 </style>

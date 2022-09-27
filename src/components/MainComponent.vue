@@ -1,5 +1,5 @@
 <template>
-    <main>
+    <main class="py-5">
 
         <DiskListComponent :diskInfo="diskInfo" />
 
