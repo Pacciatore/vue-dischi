@@ -2,7 +2,7 @@
   <div id="app" class="d-flex flex-column">
 
     <HeaderComponent />
-    <MainComponent :diskInfo="diskInfo" class="col flex-grow" />
+    <MainComponent :disksInfo="disksInfo" class="col flex-grow" />
 
   </div>
 </template>
@@ -26,16 +26,21 @@ export default {
   data() {
     return {
       disksApi: 'https://flynn.boolean.careers/exercises/api/array/music',
-      diskInfo: []
+      disksInfo: []
     }
   },
-  mounted() {
-    axios.get(this.disksApi)
-      .then((response) => {
-        console.log(response.data)
-        this.diskInfo = response.data.response;
-        console.log(this.diskInfo)
-      })
+  created() {
+    this.getDisksInfo();
+  },
+  methods: {
+    getDisksInfo() {
+      axios.get(this.disksApi)
+        .then((response) => {
+          console.log(response.data)
+          this.disksInfo = response.data.response;
+          console.log(this.disksInfo)
+        })
+    }
   }
 }
 </script>

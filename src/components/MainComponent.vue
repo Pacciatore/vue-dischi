@@ -1,7 +1,7 @@
 <template>
     <main class="py-5">
 
-        <DiskListComponent :diskInfo="diskInfo" />
+        <DiskListComponent :disksInfo="disksInfo" />
 
     </main>
 </template>
@@ -12,7 +12,7 @@ import DiskListComponent from "@/components/utils/DiskListComponent.vue";
 export default {
     name: "MainComponent",
     props: {
-        diskInfo: Array
+        disksInfo: Array
     },
     components: { DiskListComponent }
 }
