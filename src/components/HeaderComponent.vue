@@ -9,19 +9,12 @@
 
 
       <!-- Genre selection research -->
-      <div class="col-3 d-flex align-items-center">
+      <div class="col-5 d-flex align-items-center">
 
-        <label for="genreSelection" class="pe-2 text-white">Genere:</label>
+        <SelectFilterComponent :filter="searchGenre" @search="doSearch" class="col-4" />
 
-        <select name="genreSelection" id="genreSelection" class="col-4 rounded px-1 py-2" @change.prevent="doSearch">
+        <SelectFilterComponent :filter="searchGenre" @search="doSearch" class="col-4" />
 
-          <option selected value="">Tutti i generi</option>
-
-          <option v-for="genre in genres" :key="genre" :value="genre">
-            {{ genre }}
-          </option>
-
-        </select>
       </div>
 
     </div>
@@ -29,21 +22,30 @@
 </template>
 
 <script>
+import SelectFilterComponent from './utils/SelectFilterComponent.vue';
 export default {
-  name: 'HeaderComponent',
+  name: "HeaderComponent",
   data() {
     return {
-      searchGenre: ''
-    }
+      searchGenre: {
+        name: 'Genere',
+        elements: ['Pop', 'Rock', 'Metal', 'Jazz']
+      },
+      searchAuthor: {
+        name: 'Autore',
+        elements: []
+      }
+    };
   },
   props: {
     genres: Array
   },
   methods: {
-    doSearch(event) {
-      this.$emit('search', event.target.value);
+    doSearch(filter) {
+      this.$emit('search', filter)
     }
-  }
+  },
+  components: { SelectFilterComponent }
 }
 </script>
 
@@ -56,19 +58,6 @@ header {
   img {
     height: 50px;
     width: 50px;
-  }
-
-  // Select genre element
-  #genreSelection {
-    background-color: $tr-spotify-header;
-    color: white;
-    border-color: $tr-spotify-green;
-
-    &:focus-visible {
-      outline: none;
-      background-color: $tr-spotify-main;
-    }
-
   }
 
 }

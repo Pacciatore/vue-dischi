@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="d-flex flex-column">
 
-    <HeaderComponent :genres="disksGenres" @search="filterDisks" />
+    <HeaderComponent :disksInfo="disksInfo" @search="filterDisks" />
     <LoaderComponent v-if="loading" />
     <MainComponent v-else-if="errorMessage.length === 0" :disksInfo="disksToDisplay" class="col flex-grow" />
 
