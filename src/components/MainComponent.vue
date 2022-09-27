@@ -1,12 +1,20 @@
 <template>
     <main>
 
+        <DiskListComponent :diskInfo="diskInfo" />
+
     </main>
 </template>
 
 <script>
+import DiskListComponent from "@/components/utils/DiskListComponent.vue";
+
 export default {
-    name: 'MainComponent'
+    name: "MainComponent",
+    props: {
+        diskInfo: Array
+    },
+    components: { DiskListComponent }
 }
 </script>
 
