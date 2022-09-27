@@ -3,7 +3,9 @@
 
     <HeaderComponent />
     <LoaderComponent v-if="loading" />
-    <MainComponent v-else :disksInfo="disksInfo" class="col flex-grow" />
+    <MainComponent v-else-if="errorMessage.length === 0" :disksInfo="disksInfo" class="col flex-grow" />
+
+    <div v-else>{{ errorMessage }}</div>
 
   </div>
 </template>
@@ -31,7 +33,8 @@ export default {
       disksApi: 'https://flynn.boolean.careers/exercises/api/array/music',
       disksInfo: [],
       disksGenres: [],
-      loading: true
+      loading: true,
+      errorMessage: ''
     }
   },
   created() {
@@ -60,6 +63,11 @@ export default {
 
             console.log('Generi musicali presenti: ' + this.disksGenres)
           }
+        })
+        .catch((e) => {
+          console.log(e)
+          this.loading = false;
+          this.errorMessage = e.code;
         })
     }
 
