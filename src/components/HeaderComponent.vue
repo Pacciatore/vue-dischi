@@ -13,6 +13,9 @@
 <script>
 export default {
   name: 'HeaderComponent',
+  props: {
+    genre: String
+  }
 }
 </script>
 

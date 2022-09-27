@@ -26,21 +26,34 @@ export default {
   data() {
     return {
       disksApi: 'https://flynn.boolean.careers/exercises/api/array/music',
-      disksInfo: []
+      disksInfo: [],
+      disksGenres: []
     }
   },
   created() {
     this.getDisksInfo();
   },
   methods: {
+
     getDisksInfo() {
       axios.get(this.disksApi)
         .then((response) => {
           console.log(response.data)
           this.disksInfo = response.data.response;
-          console.log(this.disksInfo)
+
+          // Memorizzo i generi musicali in un array
+          this.disksInfo.forEach((disk) => {
+            console.log('Disco presente: ' + disk.title);
+
+            if (!this.disksGenres.includes(disk.genre))
+              this.disksGenres.push(disk.genre)
+          })
+
+          console.log('Generi musicali presenti: ' + this.disksGenres)
+
         })
     }
+
   }
 }
 </script>
