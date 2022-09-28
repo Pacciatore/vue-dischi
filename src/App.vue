@@ -88,6 +88,14 @@ export default {
     filterDisks(elementToSearch) {
       this.searchFilter = elementToSearch
       console.log('Filtro gli elementi: ', elementToSearch)
+    },
+
+    // Value Checkers
+    hasValidGenre(disk) {
+      return disk.genre === this.searchFilter;
+    },
+    hasValidAuthor(disk) {
+      return disk.author === this.searchFilter;
     }
 
   },
@@ -103,9 +111,9 @@ export default {
         }
 
         // Mostra i dischi del genere ricercato
-        if (disk.genre === this.searchFilter) {
+        if (this.hasValidGenre(disk)) {
           array.push(disk)
-        } else if (disk.author === this.searchFilter) {
+        } else if (this.hasValidAuthor(disk)) {
           array.push(disk)
         }
 
