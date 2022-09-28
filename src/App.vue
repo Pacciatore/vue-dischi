@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="d-flex flex-column">
 
-    <HeaderComponent :searchGenre="searchGenre" :searchAuthor="searchAuthor" @search="filterDisks" />
+    <HeaderComponent :searchGenre="genreArchive" :searchAuthor="authorArchive" @search="filterDisks" />
     <LoaderComponent v-if="loading" />
     <MainComponent v-else-if="errorMessage.length === 0" :disksInfo="disksToDisplay" class="col flex-grow" />
 
@@ -34,11 +34,11 @@ export default {
     return {
       disksApi: 'https://flynn.boolean.careers/exercises/api/array/music',
       disksInfo: [],
-      searchGenre: {
+      genreArchive: {
         name: 'Genere',
         elements: []
       },
-      searchAuthor: {
+      authorArchive: {
         name: 'Autore',
         elements: []
       },
@@ -68,15 +68,15 @@ export default {
             this.disksInfo.forEach((disk) => {
               console.log('Disco presente: ' + disk.title);
 
-              if (!this.searchGenre.elements.includes(disk.genre))
-                this.searchGenre.elements.push(disk.genre)
+              if (!this.genreArchive.elements.includes(disk.genre))
+                this.genreArchive.elements.push(disk.genre)
 
-              if (!this.searchAuthor.elements.includes(disk.author))
-                this.searchAuthor.elements.push(disk.author)
+              if (!this.authorArchive.elements.includes(disk.author))
+                this.authorArchive.elements.push(disk.author)
 
             })
 
-            console.log('Generi musicali presenti: ' + this.searchGenre.elements)
+            console.log('Generi musicali presenti: ' + this.genreArchive.elements)
           }
         })
         .catch((e) => {
