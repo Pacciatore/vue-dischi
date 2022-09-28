@@ -3,7 +3,7 @@
 
         <label for="genreSelection" class="pe-2 text-white">{{ filter.name }}:</label>
 
-        <select name="genreSelection" id="genreSelection" class="col-4 rounded px-1 py-2" @change.prevent="doSearch">
+        <select name="genreSelection" id="genreSelection" class="rounded px-1 py-2" @change.prevent="doSearch">
 
             <option selected value="">All</option>
 

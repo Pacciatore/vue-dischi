@@ -41,5 +41,12 @@ div.d-flex {
         color: #808080;
     }
 
+    transition: box-shadow 0.15s;
+
+    &:hover {
+        box-shadow: inset 0px 0 10px 5px white;
+        cursor: pointer;
+    }
+
 }
 </style>
